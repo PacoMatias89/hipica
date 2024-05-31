@@ -2,18 +2,14 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-<<<<<<< HEAD
 use App\Http\Controllers\Api\HorseController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\MailController;
 use App\Http\Controllers\Api\BokkingController;
-=======
->>>>>>> c63b82f715b9dbcafe38d4530744d25b33228f80
 
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
-<<<<<<< HEAD
 
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
@@ -33,5 +29,4 @@ Route::middleware(['auth:sanctum'])->group(function () {
 Route::middleware('auth:sanctum')->get('/user/details', function (Request $request) {
     return $request->user();
 });
-=======
->>>>>>> c63b82f715b9dbcafe38d4530744d25b33228f80
+

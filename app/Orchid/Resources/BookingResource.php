@@ -108,8 +108,4 @@ class BookingResource extends Resource
 
 
     
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> c63b82f715b9dbcafe38d4530744d25b33228f80

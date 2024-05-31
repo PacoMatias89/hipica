@@ -12,17 +12,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-<<<<<<< HEAD
+
         // $middleware->register('horses', HorsesMiddleware::class); // Registra tu middleware aquí
 
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();
-=======
-        //
-    })
-    ->withExceptions(function (Exceptions $exceptions) {
-        //
-    })->create();
->>>>>>> c63b82f715b9dbcafe38d4530744d25b33228f80

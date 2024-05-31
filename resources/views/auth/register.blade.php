@@ -19,13 +19,6 @@
                             <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
                         </div>
 
-<<<<<<< HEAD
-=======
-                        <div class="mt-4">
-                            <x-label for="surname" value="{{ __('Surname') }}" />
-                            <x-input id="surname" class="block mt-1 w-full" type="text" name="surname" :value="old('surname')" required autocomplete="surname" />
-                        </div>
->>>>>>> c63b82f715b9dbcafe38d4530744d25b33228f80
 
                         <div class="mt-4">
                             <x-label for="email" value="{{ __('Email') }}" />

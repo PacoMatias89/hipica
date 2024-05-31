@@ -17,11 +17,8 @@ class CreateNewUser implements CreatesNewUsers
      *
      * @param  array<string, string>  $input
      */
-<<<<<<< HEAD
     public function create(array $input)
-=======
-    public function create(array $input): User
->>>>>>> c63b82f715b9dbcafe38d4530744d25b33228f80
+
     {
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
@@ -36,8 +33,6 @@ class CreateNewUser implements CreatesNewUsers
             'password' => Hash::make($input['password']),
         ]);
     }
-<<<<<<< HEAD
+
 }
-=======
-}
->>>>>>> c63b82f715b9dbcafe38d4530744d25b33228f80
+

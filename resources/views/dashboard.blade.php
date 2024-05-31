@@ -1,11 +1,5 @@
 <x-app-layout>
-<<<<<<< HEAD
-  
-    <div class="py-12" style="
-    background: cornsilk;">
-=======
     <div class="py-12" style="background: cornsilk;">
->>>>>>> c63b82f715b9dbcafe38d4530744d25b33228f80
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg" style="background: burlywood;">
                 <div class="dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg  p-6">
@@ -13,21 +7,13 @@
                         <h1 class="text-2xl font-bold">Mis reservas</h1>
                     </div>
                     <div class="overflow-x-auto">
-<<<<<<< HEAD
-                        <table class="w-full table-auto ">
-=======
                         <table class="w-full table-auto">
->>>>>>> c63b82f715b9dbcafe38d4530744d25b33228f80
                             <thead>
                                 <tr class="bg-gray-100 dark:bg-gray-700" style="background: burlblanchedalmondywood;">
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hora</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Caballo</th>
-<<<<<<< HEAD
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Comentaro</th>
-=======
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Comentario</th>
->>>>>>> c63b82f715b9dbcafe38d4530744d25b33228f80
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
                                 </tr>
                             </thead>
@@ -66,8 +52,4 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
 </x-app-layout>
-=======
-</x-app-layout>
->>>>>>> c63b82f715b9dbcafe38d4530744d25b33228f80

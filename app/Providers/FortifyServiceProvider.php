@@ -43,8 +43,5 @@ class FortifyServiceProvider extends ServiceProvider
             return Limit::perMinute(5)->by($request->session()->get('login.id'));
         });
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> c63b82f715b9dbcafe38d4530744d25b33228f80
+

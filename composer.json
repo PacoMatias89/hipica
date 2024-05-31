@@ -6,11 +6,6 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-<<<<<<< HEAD
-        "dompdf/dompdf": "^3.0",
-        "laravel-lang/common": "^6.2",
-=======
->>>>>>> c63b82f715b9dbcafe38d4530744d25b33228f80
         "laravel/framework": "^11.9",
         "laravel/jetstream": "^5.1",
         "laravel/sanctum": "^4.0",

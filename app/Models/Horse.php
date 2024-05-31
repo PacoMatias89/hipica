@@ -26,8 +26,5 @@ class Horse extends Model
     {
         return $this->hasMany(Booking::class);
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> c63b82f715b9dbcafe38d4530744d25b33228f80
+

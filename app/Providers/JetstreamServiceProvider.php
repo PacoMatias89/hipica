@@ -4,12 +4,9 @@ namespace App\Providers;
 
 use App\Actions\Jetstream\DeleteUser;
 use Illuminate\Support\ServiceProvider;
-<<<<<<< HEAD
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Auth\Notifications\VerifyEmail;
 
-=======
->>>>>>> c63b82f715b9dbcafe38d4530744d25b33228f80
 use Laravel\Jetstream\Jetstream;
 
 class JetstreamServiceProvider extends ServiceProvider
@@ -46,8 +43,5 @@ class JetstreamServiceProvider extends ServiceProvider
             'delete',
         ]);
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> c63b82f715b9dbcafe38d4530744d25b33228f80
+
