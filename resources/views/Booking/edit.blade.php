@@ -4,6 +4,19 @@
             <div class="p-6 bg-white border-b border-gray-200">
                 <h1 class="mt-3 mb-3 text-lg font-semibold">Editar Reserva</h1>
 
+                
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+               
+
                 <form method="POST" action="{{ route('bookings.update', $booking->id) }}">
                     @method('PUT')
                     @csrf

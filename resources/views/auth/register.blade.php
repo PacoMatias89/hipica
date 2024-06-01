@@ -16,9 +16,9 @@
 
                         <div>
                             <x-label for="name" value="{{ __('Name') }}" />
-                            <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+                            <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" oninput="validateName()" />
+                            <span id="name-error" class="text-red-500 text-sm hidden">Solo se permiten letras y espacios.</span>
                         </div>
-
 
                         <div class="mt-4">
                             <x-label for="email" value="{{ __('Email') }}" />
@@ -70,3 +70,18 @@
 
     </x-authentication-card>
 </x-guest-layout>
+
+<script>
+    function validateName() {
+        var nameInput = document.getElementById('name');
+        var nameError = document.getElementById('name-error');
+        var valid = /^[a-zA-Z\s]*$/.test(nameInput.value);
+        if (!valid) {
+            nameError.classList.remove('hidden');
+            nameInput.classList.add('border-red-500');
+        } else {
+            nameError.classList.add('hidden');
+            nameInput.classList.remove('border-red-500');
+        }
+    }
+</script>

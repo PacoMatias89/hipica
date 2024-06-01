@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmailController;
-use App\Http\Controllers\Web\BookingController;
 use App\Http\Controllers\Web\BokkingController;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -13,17 +12,17 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
-    Route::get('/dashboard', [BookingController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [BokkingController::class, 'index'])->name('dashboard');
     Route::get('/dashboard', [BokkingController::class, 'index'])->name('dashboard');
 
     // Rutas CRUD de caballos
     Route::resource('horse', HorseController::class);
 
     // Rutas CRUD de reservas
-    Route::resource('bookings', BookingController::class);
+    Route::resource('bookings', BokkingController::class);
 
     // Ruta para descargar el PDF del detalle de la reserva
-    Route::get('/bookings/{id}/pdf', [BookingController::class, 'showPdf'])->name('Booking.show.pdf');
+    Route::get('/bookings/{id}/pdf', [BokkingController::class, 'showPdf'])->name('Booking.show.pdf');
 });
 
 
