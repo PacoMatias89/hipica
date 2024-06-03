@@ -16,7 +16,7 @@ class BookingConfirmation extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(Booking $booking)
+    public function __construct(Bokking $booking)
     {
         $this->booking = $booking;
     }

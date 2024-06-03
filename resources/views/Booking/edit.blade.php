@@ -15,6 +15,15 @@
                     </div>
                 @endif
 
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                    <script>
+                        alert("Se ha añadido una reserva. Verifique su correo electrónico para los detalles de la reserva.");
+                    </script>
+                @endif
+
                
 
                 <form method="POST" action="{{ route('bookings.update', $booking->id) }}">
@@ -67,12 +76,19 @@
     </div>
 </x-app-layout>
 <script>
-function checkWeekend(input) {
-    var date = new Date(input.value);
-    var day = date.getDay();
-    if (day != 6 && day != 0) {
-        alert('Las reservas solo están permitidas los sábados y domingos.');
-        input.value = '';
+    function updatePrice(selectElement) {
+        var horseId = selectElement.value;
+        var horsePrice = document.querySelector('option[value="' + horseId + '"]').getAttribute('data-price');
+        document.getElementById('horse_price').value = horsePrice;
     }
-}
+
+    function checkWeekend(inputElement) {
+        var date = new Date(inputElement.value);
+        var day = date.getDay();
+
+        if (day !== 6 && day !== 0) {
+            alert('Las reservas solo están permitidas los sábados y domingos.');
+            inputElement.value = '';
+        }
+    }
 </script>

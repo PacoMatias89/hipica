@@ -22,7 +22,7 @@ class BokkingController extends Controller
         $user = Auth::user();
 
         // Cargar las reservas del usuario autenticado junto con la relación con Horse
-        $bookings = Bokking::with('horse:id,name')
+        $bookings = Bokking::with('horse:id,name,price')
             ->where('user_id', $user->id)
             ->get();
 
@@ -35,6 +35,7 @@ class BokkingController extends Controller
                 'comments' => $booking->comments,
                 'user_id' => $booking->user_id,
                 'horse_name' => $booking->horse->name,
+                'horse_price' => $booking->horse->price,
             ];
         });
 
@@ -95,8 +96,8 @@ class BokkingController extends Controller
       
        
     
-        // Cargar la relación con Horse para incluir el nombre en la respuesta
-        $booking->load('horse:id,name');
+        // Cargar la relación con Horse para incluir el nombre y el precio en la respuesta
+        $booking->load('horse:id,name,price');
     
         // Crear la respuesta JSON sin incluir el user_id
         $response = [
@@ -104,11 +105,12 @@ class BokkingController extends Controller
             'date' => $booking->date,
             'time' => $booking->time,
             'comments' => $booking->comments,
-            'horse_name' => $booking->horse->name, // Incluye el nombre del caballo
+            'horse_name' => $booking->horse->name,
+            'horse_price' => $booking->horse->price,
         ];
 
-         // Enviar correo electrónico de confirmación utilizando la notificación CustomBookingEmail
-         $user->notify(new CustomBookingEmail($booking));
+        // Enviar correo electrónico de confirmación utilizando la notificación CustomBookingEmail
+        $user->notify(new CustomBookingEmail($booking));
     
         return response()->json($response, 201);
     }
