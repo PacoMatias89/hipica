@@ -5,7 +5,8 @@ use App\Http\Controllers\EmailController;
 use App\Http\Controllers\Web\BokkingController;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
-use App\Http\Controllers\StripeController;
+use App\Http\Controllers\PaymentController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -44,4 +45,8 @@ Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth:sanctum'])->name('verification.send');
+
+Route::post('/payment', [PaymentController::class, 'index'])->name('payment');
+Route::post('/charge', [PaymentController::class, 'charge'])->name('charge');
+Route::get('/confirm', [PaymentController::class, 'confirm'])->name('confirm');
 

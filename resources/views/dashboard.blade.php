@@ -6,6 +6,13 @@
                     <div class="flex justify-center items-center mb-4">
                         <h1 class="text-2xl font-bold">Mis reservas</h1>
                     </div>
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            <script>
+                                alert("{{ session('success') }}");
+                            </script>
+                        </div>
+                    @endif
                     <div class="overflow-x-auto">
                         <table class="w-full table-auto">
                             <thead>

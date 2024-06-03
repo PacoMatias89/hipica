@@ -59,6 +59,12 @@
                     </div>
 
                     <div class="mb-6">
+                        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                        <input type="email" name="email" value="{{ Auth::user()->email }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required readonly>
+                    </div>
+
+
+                    <div class="mb-6">
                         <label for="comments" class="block text-sm font-medium text-gray-700">Comentarios</label>
                         <textarea name="comments" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" rows="3" placeholder="Comentarios sobre la reserva (opcional)"></textarea>
                     </div>

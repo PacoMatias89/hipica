@@ -1,61 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Reserva - Caballos para disfrutar</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factura - Reserva de Caballos</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.7/dist/tailwind.min.css" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            text-align: center;
-            color: #1e3a8a;
+        .invoice-title {
             font-size: 2em;
-            margin-bottom: 20px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 1em;
         }
-        .details {
-            font-size: 1.1em;
-            line-height: 1.6;
+        .invoice-details {
+            width: 100%;
+            border-collapse: collapse;
         }
-        .details p {
-            margin: 10px 0;
+        .invoice-details th, .invoice-details td {
+            border: 1px solid #000;
+            padding: 0.5em;
         }
-        .details p strong {
-            display: inline-block;
-            width: 150px;
-            color: #1e3a8a;
+        .invoice-details th {
+            background-color: #f8f8f8;
+            text-align: left;
+        }
+        .total-price {
+            color: #1a202c;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-top: 1em;
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <h1>Caballos para disfrutar</h1>
-        <div class="details">
-            <p><strong>Fecha:</strong> {{ $booking->date }}</p>
-            <p><strong>Hora:</strong> {{ $booking->time }}</p>
-            <p><strong>Comentarios:</strong> {{ $booking->comments }}</p>
-            <p><strong>Caballo:</strong> {{ $booking->horse->name }}</p>
-            <p><strong>Precio del Caballo:</strong> {{ $booking->horse->price }}</p>
-        </div>
+<body class="bg-gray-100 font-sans">
+    <div class="container mx-auto p-8 bg-white rounded-lg shadow-lg mt-16">
+        <h1 class="invoice-title">Factura de Reserva - Caballos para disfrutar</h1>
+        <table class="invoice-details">
+            <tr>
+                <th>Fecha</th>
+                <td>{{ $booking->date }}</td>
+            </tr>
+            <tr>
+                <th>Hora</th>
+                <td>{{ $booking->time }}</td>
+            </tr>
+            <tr>
+                <th>Caballo</th>
+                <td>{{ $booking->horse->name }}</td>
+            </tr>
+            <tr>
+                <th>Precio del Caballo</th>
+                <td>{{ $booking->horse->price }}</td>
+            </tr>
+            <tr>
+                <th>Comentarios</th>
+                <td>{{ $booking->comments }}</td>
+            </tr>
+        </table>
+        <p class="total-price">Precio Total: {{ $booking->horse -> price }} €</p>
     </div>
-</body>
-<script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
         document.getElementById('generatePdfButton').addEventListener('click', function() {
             // Utiliza html2pdf para convertir el contenido actual a PDF
             const element = document.body;
             html2pdf().from(element).save();
         });
     </script>
+</body>
 </html>
-

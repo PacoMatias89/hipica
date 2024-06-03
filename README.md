@@ -1,66 +1,63 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Caballos para disfrutar
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Este proyecto es tanto aplicación web como una aplicación móvil de reservas de caballos. La aplicación permite a los usuarios reservar un caballo para un día y hora específicos. La aplicación está diseñada para ser fácil de usar, con una interfaz de usuario intuitiva y una arquitectura de software robusta.
 
-## About Laravel
+## Descripción Detallada
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+La aplicación web de reservas de caballos es una plataforma que permite a los usuarios reservar un caballo para un día y hora específicos. Los usuarios pueden registrarse en la plataforma, iniciar sesión, hacer una reserva, ver sus reservas existentes y cancelar reservas si es necesario.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Autenticación de usuarios
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+La autenticación de usuarios es una característica crucial de la aplicación. Los usuarios pueden registrarse proporcionando su nombre, correo electrónico y una contraseña. Los datos de los usuarios se almacenan de forma segura en la base de datos y se utilizan para personalizar la experiencia del usuario. Los usuarios pueden iniciar sesión en la aplicación utilizando sus credenciales de correo electrónico y contraseña.
 
-## Learning Laravel
+## Creación y gestión de reservas
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Una vez que un usuario ha iniciado sesión, puede hacer una reserva. Para hacer una reserva, el usuario selecciona un caballo, una fecha y una hora. La aplicación verifica la disponibilidad del caballo para la fecha y hora seleccionadas y, si el caballo está disponible, se crea la reserva. Los usuarios pueden ver todas sus reservas existentes y tienen la opción de cancelar cualquier reserva si es necesario.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Validación de datos de entrada
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+La aplicación valida todos los datos de entrada para garantizar que son correctos y completos. Esto incluye la verificación de las fechas y horas de las reservas, así como la verificación de los datos de los usuarios. Si los datos de entrada no son válidos, la aplicación muestra un mensaje de error al usuario.
 
-## Laravel Sponsors
+## Envío de notificaciones por correo electrónico
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+La aplicación envía notificaciones por correo electrónico a los usuarios cuando crean, modifican o cancelan reservas. Esto ayuda a los usuarios a mantenerse al tanto de sus reservas y a recordar cualquier reserva que hayan hecho.
 
-### Premium Partners
+## Tecnologías Utilizadas
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Este proyecto utiliza varias tecnologías para proporcionar su funcionalidad:
 
-## Contributing
+- PHP: El lenguaje de programación principal utilizado para el desarrollo del servidor. PHP es un lenguaje de programación de servidor popular que es potente y flexible.
+- Laravel: Un marco de trabajo de PHP que proporciona una estructura y herramientas para el desarrollo de la aplicación. Laravel facilita muchas tareas comunes de desarrollo web, como la autenticación de usuarios, la gestión de bases de datos y el enrutamiento.
+- MySQL: El sistema de gestión de bases de datos utilizado para almacenar los datos de la aplicación. MySQL es un sistema de gestión de bases de datos relacional que es rápido, confiable y fácil de usar.
+- Dompdf: Una biblioteca de PHP utilizada para generar PDFs. Dompdf convierte HTML a PDF, lo que permite a la aplicación generar documentos PDF a partir de plantillas HTML.
+- Mail: Una biblioteca de PHP utilizada para enviar correos electrónicos. Mail facilita el envío de correos electrónicos desde la aplicación, lo que permite enviar notificaciones por correo electrónico a los usuarios.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Cómo Instalar
 
-## Code of Conduct
+Para instalar y ejecutar este proyecto en tu máquina local, sigue estos pasos:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+1. Clona el repositorio en tu máquina local o en tu servidor utilizando git clone. Esto descargará una copia del código del proyecto en tu máquina.
+2. Navega al directorio del proyecto en tu terminal. Puedes hacer esto utilizando el comando cd, seguido del nombre del directorio del proyecto.
+3. Ejecuta composer install para instalar las dependencias del proyecto. Composer es un gestor de dependencias para PHP, y este comando instalará todas las bibliotecas y paquetes que el proyecto necesita para funcionar.
+4. Crea un archivo .env en el directorio raíz del proyecto y configura tus credenciales de base de datos. Este archivo se utiliza para almacenar la configuración del entorno, como las credenciales de la base de datos y las claves de la API.
+5. Ejecuta php artisan migrate para crear las tablas de la base de datos. Este comando utiliza las migraciones de Laravel para crear las tablas necesarias en la base de datos.
+6. Inicia el servidor de desarrollo ejecutando php artisan serve. Esto iniciará el servidor de desarrollo de Laravel, y podrás acceder a la aplicación en tu navegador web en http://localhost:8000.  
 
-## Security Vulnerabilities
+## Cómo Usar
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Para usar la aplicación, sigue estos pasos:
 
-## License
+1. Abre la aplicación en tu navegador web. Si estás ejecutando la aplicación en tu máquina local, puedes hacer esto navegando a http://localhost:8000 en tu navegador.
+2. Regístrate como usuario proporcionando tu nombre, correo electrónico y contraseña. Una vez que te hayas registrado, podrás iniciar sesión en la aplicación.
+3. Inicia sesión con tus credenciales. Una vez que hayas iniciado sesión, podrás hacer reservas.
+4. Navega a la página de reservas y selecciona un caballo, una fecha y una hora. Una vez que hayas hecho tu selección, haz clic en el botón "Reservar" para hacer tu reserva.
+5. Confirma tu reserva. Recibirás una notificación por correo electrónico confirmando tu reserva.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Licencia
+
+Este proyecto está licenciado bajo la licencia MIT. Esto significa que puedes usar, copiar, modificar y distribuir el código del proyecto, siempre y cuando incluyas el aviso de copyright original.
+
+## Contacto
+
+Si tienes alguna pregunta, comentario o sugerencia, no dudes en ponerte en contacto con nosotros. Puedes enviarnos un correo electrónico a paco@franciscomolina.es

@@ -19,10 +19,16 @@ class BokkingController extends Controller
     public function index(Request $request)
     {
         $user = $request->user(); // Obtén al usuario autenticado
-        $bookings = Bokking::where('user_id', $user->id)->get(); // Obtén las reservas del usuario actual
-
+        $bookings = Bokking::where('user_id', $user->id)
+                           ->where('date', '>=', now()->toDateString()) // Solo reservas futuras
+                           ->orderBy('date', 'asc') // Ordenar por fecha de manera ascendente
+                           ->orderBy('time', 'asc') // Luego, ordenar por hora de manera ascendente
+                           ->get(); // Obtén las reservas del usuario actual
+    
         return view('dashboard', compact('bookings'));
     }
+    
+    
 
     public function create()
     {
@@ -37,9 +43,11 @@ class BokkingController extends Controller
             'date' => 'required|date|after_or_equal:today|before_or_equal:' . now()->addDays(30)->toDateString(),
             'time' => 'required|in:10:00,11:00,12:00,13:00',
             'horse_id' => 'required|exists:horses,id',
+            'email' => 'required|email',
             'comments' => 'nullable|string',
-        ]);
 
+        ]);
+    
         // Verificar si las horas del día ya han pasado
         $selectedDate = new \DateTime($request->date);
         $currentTime = now();
@@ -51,18 +59,18 @@ class BokkingController extends Controller
                 return redirect()->back()->withErrors(['time' => 'Las horas de los turnos para hoy ya han terminado. Vuelve mañana.'])->withInput();
             }
         }
+    
         // Verificar que la fecha seleccionada sea un sábado o domingo
         $date = new \DateTime($request->date);
         if (!in_array($date->format('N'), [6, 7])) {
             return redirect()->back()->withErrors(['date' => 'Las reservas solo están permitidas los sábados y domingos.'])->withInput();
         }
-
+    
         // Verificar que el caballo no esté enfermo
         $horse = Horse::findOrFail($request->horse_id);
         if ($horse->sick) {
             return redirect()->back()->withErrors(['horse_id' => 'No se puede reservar un caballo que esté enfermo.'])->withInput();
         }
-
     
         // Verificar que el usuario no tenga una reserva en el mismo turno
         $existingBooking = Bokking::where('date', $request->date)
@@ -72,8 +80,7 @@ class BokkingController extends Controller
         if ($existingBooking) {
             return redirect()->back()->withErrors(['time' => 'Ya tienes una reserva en este turno.'])->withInput();
         }
-        
-
+    
         // Verificar que el caballo no esté reservado en el mismo turno
         $existingBooking = Bokking::where('date', $request->date)
             ->where('time', $request->time)
@@ -82,16 +89,14 @@ class BokkingController extends Controller
         if ($existingBooking) {
             return redirect()->back()->withErrors(['horse_id' => 'El caballo ya está reservado en este turno.'])->withInput();
         }
-
-   
-        
+    
         // Verificar que el usuario no tenga otra reserva en las últimas 2 horas del mismo día
         $time = new \DateTime($request->time);
         $earlierTime = (clone $time)->modify('-2 hours')->format('H:i');
-
+    
         $bookingTimes = ['10:00', '11:00', '12:00', '13:00'];
         $currentIndex = array_search($request->time, $bookingTimes);
-
+    
         for ($i = max(0, $currentIndex - 2); $i <= $currentIndex; $i++) {
             if ($i != $currentIndex) {
                 $lastBooking = Bokking::where('user_id', Auth::id())
@@ -104,19 +109,20 @@ class BokkingController extends Controller
                 }
             }
         }
-        
     
-        // Crear la reserva
-        $booking = new Bokking($request->all());
-        $booking->user_id = Auth::id();
-        $booking->save();
-
-        // Enviar correo electrónico de confirmación utilizando la notificación CustomBookingEmail
-        $user = Auth::user();
-        $user->notify(new CustomBookingEmail($booking));
-
-        return redirect()->route('bookings.index')->with('success', 'Reserva creada exitosamente. Verifique su correo electrónico para los detalles de la reserva.');
+        // Pasar los datos de la reserva a la vista payment
+        $bookingData = [
+            'date' => $request->date,
+            'time' => $request->time,
+            'horse_id' => $request->horse_id,
+            'comments' => $request->comments,
+            'email' => $request->email,
+            'horse_price' => $horse->price,
+        ];
+    
+        return view('payment', compact('bookingData'));
     }
+    
 
     public function show($id)
     {
@@ -251,4 +257,3 @@ class BokkingController extends Controller
         return $response;
     }
 }
-
