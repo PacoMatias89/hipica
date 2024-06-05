@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Caballos para disfrutar</title>
-
+    <link rel="shortcut icon" href="{{ asset('icons/icono_app.png') }}" />
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
@@ -24,7 +24,7 @@
             <header class="py-4 bg-blue-500">
                 <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
                 <h1 class="flex items-center text-3xl font-bold text-center text-white dark:text-white">
-                        <img class="h-8 w-auto mr-2" src="{{ asset('icons/horse.png') }}" alt="Logo"> {{ __('Caballos para disfrutar') }}
+                        <img class="h-8 w-auto mr-2"  src="{{ asset('icons/icono_app.png') }}" alt="Logo"/> {{ __('Caballos para disfrutar') }}
                     </h1>
                     @if (Route::has('login'))
                         <nav class="flex ">

@@ -1,6 +1,10 @@
 # Caballos para disfrutar
 
+### IMPORTANTE
+>El dump está en la carpeta:  _**resources/sql**_
+
 Este proyecto es tanto aplicación web como una aplicación móvil de reservas de caballos. La aplicación permite a los usuarios reservar un caballo para un día y hora específicos. La aplicación está diseñada para ser fácil de usar, con una interfaz de usuario intuitiva y una arquitectura de software robusta.
+
 
 ## Descripción Detallada
 
@@ -10,17 +14,44 @@ La aplicación web de reservas de caballos es una plataforma que permite a los u
 
 La autenticación de usuarios es una característica crucial de la aplicación. Los usuarios pueden registrarse proporcionando su nombre, correo electrónico y una contraseña. Los datos de los usuarios se almacenan de forma segura en la base de datos y se utilizan para personalizar la experiencia del usuario. Los usuarios pueden iniciar sesión en la aplicación utilizando sus credenciales de correo electrónico y contraseña.
 
+En la portada lo primero que nos encontramos será el login del usuario:
+![portada](media/portada.jpg)
+
+En el cual previamente tendremos que crear un registro para poder logearnos.
+
+![registro](media/registro.jpg)
+
 ## Creación y gestión de reservas
 
 Una vez que un usuario ha iniciado sesión, puede hacer una reserva. Para hacer una reserva, el usuario selecciona un caballo, una fecha y una hora. La aplicación verifica la disponibilidad del caballo para la fecha y hora seleccionadas y, si el caballo está disponible, se crea la reserva. Los usuarios pueden ver todas sus reservas existentes y tienen la opción de cancelar cualquier reserva si es necesario.
+
+### Crear reserva:
+![create_booking](media/create_booking.png)
+
+Una vez rellenado los campos, al hacer click en el botón de _**HACER RESERVA**_ nos mandará a la pasarela de pago para poder realizar la reserva con éxisto y una vez hecho todo eso, se nos mandará un correo con los detalles en PDF a nuestro correo
+
+### Dashboard:
+
+![dashboard](media/dashboard.png)
+
+### Editar reservar.
+Como podremos observar en la imagen del dashboard, aparecen dos iconos al lado de cada reservam en el apartado de _**ACCIONES**_, el icono del lápiz que aparece primero es el encargado de actualizar nuestra reserva, la cual nos enviará a la vista de editar, así poder editar la reserva.
+
+![edit_booking](media/edit_booking.png)
+
+Cuando hacemos la actualización se nos mostrará un mensaje de que la actualización ha sido llevada con exito y nos informa de que tendremos in correo electrónico en nuestro email de confirmación junto a un PDF con la reserva actualizada.
+
+#### Mejora
+>cuando se edite, lo suye es que si elige un caballo de diferente precio al precio de la reserva sin actualizar, que se le devuelva o pague la diferencia.
+
+### Eliminar reserva
+En este caso, cuando vamos hacer una eliminación de la reserva, se nos mostrará en el dashboard de verificación por si queremos o no queremos eliminar la reserva y si decimos que si, nos volverá a mostrar otro mensaje esta vez de satifacción y de que tenemos un correo con la notificación.
 
 ## Validación de datos de entrada
 
 La aplicación valida todos los datos de entrada para garantizar que son correctos y completos. Esto incluye la verificación de las fechas y horas de las reservas, así como la verificación de los datos de los usuarios. Si los datos de entrada no son válidos, la aplicación muestra un mensaje de error al usuario.
 
-## Envío de notificaciones por correo electrónico
 
-La aplicación envía notificaciones por correo electrónico a los usuarios cuando crean, modifican o cancelan reservas. Esto ayuda a los usuarios a mantenerse al tanto de sus reservas y a recordar cualquier reserva que hayan hecho.
 
 ## Tecnologías Utilizadas
 
