@@ -84,7 +84,7 @@ class CustomBookingEmail extends Notification
 
         // Save the PDF to temporary storage
         $pdfContent = $dompdf->output();
-        $pdfPath = storage_path('app/public/booking_details.pdf');
+        $pdfPath = storage_path('app/public/Detalles_reserva_.pdf');
         file_put_contents($pdfPath, $pdfContent);
 
         // Return the path to the saved PDF
