@@ -11,10 +11,9 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use Illuminate\Support\Facades\Storage;
 
-class CustomBookingEmail extends Notification
+class CustomBookingEditEmail extends Notification
 {
     use Queueable;
-
     protected $booking;
 
     /**
@@ -24,6 +23,7 @@ class CustomBookingEmail extends Notification
     {
         $this->booking = $booking;
     }
+   
 
     /**
      * Get the notification's delivery channels.
@@ -40,28 +40,21 @@ class CustomBookingEmail extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
-        // Generate the PDF content and save it to temporary storage
         $pdfPath = $this->generatePdf();
 
-        // Attach the PDF to the email using its temporary path
         return (new MailMessage)
-            ->subject('Confirmación de reserva')
-            ->line('Se ha realizado una reserva con éxito.')
+            ->subject('Actualización  de reserva')
+            ->line('Se ha realizado una actualización con éxito.')
             ->line('Detalles de la reserva:')
             ->line('Fecha: ' . $this->booking->date)
             ->line('Hora: ' . $this->booking->time)
             ->line('Comentarios: ' . $this->booking->comments)
             ->line('Caballo: ' . $this->booking->horse->name)
             ->line('Precio del caballo: '. $this->booking->horse->price)
-            ->attach($pdfPath, ['as' => 'Detalles_reserva.pdf'])
+            ->attach($pdfPath, ['as' => 'Detalles_actualizados_reserva.pdf'])
             ->line('¡Gracias por utilizar nuestro servicio!');
     }
 
-    /**
-     * Generate the PDF for the booking details and save it to temporary storage.
-     *
-     * @return string
-     */
     protected function generatePdf(): string
     {
         // Load the HTML content from the view
@@ -89,5 +82,17 @@ class CustomBookingEmail extends Notification
 
         // Return the path to the saved PDF
         return $pdfPath;
+    }
+
+    /**
+     * Get the array representation of the notification.
+     *
+     * @return array<string, mixed>
+     */
+    public function toArray(object $notifiable): array
+    {
+        return [
+            //
+        ];
     }
 }

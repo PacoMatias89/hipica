@@ -8,10 +8,11 @@ use App\Models\Bokking;
 use App\Models\Horse;
 use Auth;
 use Illuminate\Support\Facades\Mail;
-use App\Notifications\CustomBookingEmail;
+use App\Notifications\CustomBookingEditEmail;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Illuminate\Support\Facades\Response;
+use App\Notifications\CustomBookingDeleteEmail;
 
 class BokkingController extends Controller
 {
@@ -207,8 +208,12 @@ class BokkingController extends Controller
 
         $booking->fill($request->all());
         $booking->save();
+        
+        //Enviamos el email de confirmación de la actualización
+        $user = Auth::user();
+        $user->notify(new CustomBookingEditEmail($booking));
 
-        return redirect()->route('bookings.index')->with('success', 'Reserva actualizada exitosamente.');
+        return redirect()->route('bookings.index')->with('success', 'Reserva actualizada exitosamente. Se ha enviado un correo electrónico con los detalles de la reserva.');
     }
 
     public function destroy($id)
@@ -221,9 +226,13 @@ class BokkingController extends Controller
             return redirect()->route('bookings.index')->withErrors(['message' => 'No se puede eliminar una reserva pasada.']);
         }
 
+        //Enviamos el email de confirmación de la eliminación
+        $user = Auth::user();
+        $user->notify(new CustomBookingDeleteEmail($id));
+
         $booking->delete();
 
-        return redirect()->route('bookings.index')->with('success', 'Reserva eliminada exitosamente.');
+        return redirect()->route('bookings.index')->with('success', 'Reserva eliminada exitosamente. Se ha enviado un correo electrónico confirmando la eliminación de la reserva.');
     }
 
     public function showPdf($id)
@@ -250,4 +259,4 @@ class BokkingController extends Controller
         return $response;
     }
 }
-?>
+

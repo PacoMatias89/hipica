@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Api;
 
 use App\Models\Bokking;
@@ -10,6 +9,8 @@ use App\Models\Horse;
 use Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Notifications\CustomBookingEmail;
+use App\Notifications\CustomBookingEditEmail;
+use App\Notifications\CustomBookingDeleteEmail;
 
 class BokkingController extends Controller
 {
@@ -18,12 +19,11 @@ class BokkingController extends Controller
         $user = Auth::user();
         $currentDate = now();
 
-        // Obtener solo las reservas futuras, ordenadas de más recientes a más lejanas
         $bookings = Bokking::where('user_id', $user->id)
-                           ->where('date', '>=', now()->toDateString()) // Solo reservas futuras
-                           ->orderBy('date', 'asc') // Ordenar por fecha de manera ascendente
-                           ->orderBy('time', 'asc') // Luego, ordenar por hora de manera ascendente
-                           ->get(); // Obtén las reservas del usuario actual
+                           ->where('date', '>=', now()->toDateString())
+                           ->orderBy('date', 'asc')
+                           ->orderBy('time', 'asc')
+                           ->get();
         $bookings = $bookings->map(function ($booking) {
             return [
                 'id' => $booking->id,
@@ -46,7 +46,7 @@ class BokkingController extends Controller
         $validator = Validator::make($request->all(), [
             'date' => 'required|date',
             'time' => 'required|date_format:H:i',
-            'comments' => 'required|string',
+            'comments' => 'nullable|string',
             'horse_id' => 'required|exists:horses,id',
         ]);
 
@@ -102,23 +102,23 @@ class BokkingController extends Controller
     public function update(Request $request, $id)
     {
         $booking = Bokking::find($id);
-    
+
         if (is_null($booking)) {
             return response()->json(['message' => 'Bokking not found'], 404);
         }
-    
+
         $request->validate([
             'date' => 'required|date',
             'time' => 'required|date_format:H:i',
             'comments' => 'nullable|string',
             'horse_id' => 'required|exists:horses,id',
         ]);
-    
+
         $horse = Horse::find($request->horse_id);
         if ($horse && $horse->is_sick) {
             return response()->json(['error' => 'No se puede reservar un caballo enfermo'], 400);
         }
-    
+
         $existingBooking = Bokking::where('date', $request->date)
             ->where('time', $request->time)
             ->where('id', '!=', $booking->id)
@@ -126,16 +126,16 @@ class BokkingController extends Controller
         if ($existingBooking >= 5) {
             return response()->json(['error' => 'No hay disponibilidad en este horario'], 400);
         }
-    
+
         $booking->update([
             'date' => $request->date,
             'time' => $request->time,
             'comments' => $request->comments,
             'horse_id' => $request->horse_id,
         ]);
-    
+
         $booking->load('horse:id,name');
-    
+
         $response = [
             'id' => $booking->id,
             'date' => $booking->date,
@@ -143,7 +143,19 @@ class BokkingController extends Controller
             'comments' => $booking->comments,
             'horse_name' => $booking->horse->name,
         ];
-    
+
+        $user = Auth::user();
+        // Comprobación de existencia del usuario
+        if ($user) {
+            try {
+                $user->notify(new CustomBookingEditEmail($booking));
+            } catch (\Exception $e) {
+                return response()->json(['error' => 'Error sending notification: ' . $e->getMessage()], 500);
+            }
+        } else {
+            return response()->json(['error' => 'User not found'], 404);
+        }
+
         return response()->json($response, 200);
     }
 
@@ -156,6 +168,18 @@ class BokkingController extends Controller
         }
 
         $booking->delete();
+
+        $user = Auth::user();
+        // Comprobación de existencia del usuario
+        if ($user) {
+            try {
+                $user->notify(new CustomBookingDeleteEmail($id));
+            } catch (\Exception $e) {
+                return response()->json(['error' => 'Error sending notification: ' . $e->getMessage()], 500);
+            }
+        } else {
+            return response()->json(['error' => 'User not found'], 404);
+        }
 
         return response()->json(['message' => 'Bokking deleted successfully'], 200);
     }
